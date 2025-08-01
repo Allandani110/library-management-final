@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simple Library Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px 0;
+      width: 200px;
+      display: block;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Library Management</h1>
+
+  <form id="bookForm">
+    <input type="text" id="title" placeholder="Book Title" required />
+    <input type="text" id="author" placeholder="Author" required />
+    <input type="number" id="year" placeholder="Year Published" required min="0" />
+    <button type="submit">Add Book</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Year Published</th>
+      </tr>
+    </thead>
+    <tbody id="bookList">
+      <!-- Book entries will appear here -->
+    </tbody>
+  </table>
+
+  <script>
+    const bookForm = document.getElementById('bookForm');
+    const bookList = document.getElementById('bookList');
+
+    bookForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const title = document.getElementById('title').value.trim();
+      const author = document.getElementById('author').value.trim();
+      const year = document.getElementById('year').value.trim();
+
+      if (title && author && year) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${title}</td>
+          <td>${author}</td>
+          <td>${year}</td>
+        `;
+
+        bookList.appendChild(row);
+
+        bookForm.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
